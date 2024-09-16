@@ -4,9 +4,22 @@ import Model.Tarefa;
 import Repository.TarefasRepository;
 
 public class CriarTarefaCommand implements Command {
-    TarefasRepository tarefasRepository = new TarefasRepository();
-    
-    public void execute(Tarefa t){
-        tarefasRepository.create(t);
+    private TarefasRepository tarefasRepository = new TarefasRepository();
+    private Tarefa t;
+   
+
+
+
+    public void execute(){
+        tarefasRepository.create(this.t);
+    }
+
+
+
+    public Tarefa getT() {
+        return t;
+    }
+    public void setT(Tarefa t) {
+        this.t = t;
     }
 }

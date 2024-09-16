@@ -3,6 +3,7 @@ package Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.EstadoTarefa;
 import Model.Tarefa;
 
 public class TarefasRepository {
@@ -29,6 +30,20 @@ public class TarefasRepository {
             if(t.getIdTarefa() == tOut.getIdTarefa()){
                 tarefas.remove(t);
             }
+        }
+    }
+
+    public void delete(int idTarefa){
+        for(Tarefa t : tarefas){
+            if(t.getIdTarefa() == idTarefa)
+                tarefas.remove(t);
+        }
+    }
+
+    public void alterarEstadoTarefa(int idTarefa, EstadoTarefa et){
+        for(Tarefa t : tarefas){
+            if(t.getIdTarefa() == idTarefa)
+                t.setEstadoTarefa(et);
         }
     }
 }
