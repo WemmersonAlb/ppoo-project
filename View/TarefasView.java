@@ -86,18 +86,25 @@ public class TarefasView {
     }
 
     public void updateListaTarefas(List<Tarefa> lista) {
+
+        this.tarefas = lista;
+        refazerPainelLista();
         if (lista == null) {
             lista = new ArrayList<>();
         }
-        this.tarefas = lista;
-        refazerPainelLista();
     }
 
     public void refazerPainelLista() {
 
-        painelScroll.remove(painelTarefas);
-        JPanel novoPainelTarefas = new JPanel();
-        novoPainelTarefas.setLayout(new BoxLayout(novoPainelTarefas, BoxLayout.Y_AXIS));
+        System.out.println("Atualizando painel de tarefas. Número de tarefas: " + tarefas.size());
+
+        for (Tarefa t : tarefas) {
+            System.out.println("Tarefa: " + t.getNome()); // Exibe no console o nome da tarefa
+        }
+
+        painelTarefas.removeAll(); // Limpa o painel de tarefas anterior
+
+        // Cria um novo painel para exibir a lista atualizada de tarefas
         for (Tarefa t : tarefas) {
             JPanel itensPainelTarefa = new JPanel();
             itensPainelTarefa.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -114,19 +121,16 @@ public class TarefasView {
             itensPainelTarefa.add(deleteBtn);
             itensPainelTarefa.add(updateEstadoBtn);
 
-            novoPainelTarefas.add(itensPainelTarefa);
+            painelTarefas.add(itensPainelTarefa); // Adiciona o item da tarefa ao painel
         }
-        this.painelTarefas = novoPainelTarefas;
-        painelTarefas.revalidate();
-        painelTarefas.repaint();
-        painelScroll.add(painelTarefas);
-        painelScroll.revalidate();
-        painelScroll.repaint();
-        frame.revalidate();
-        frame.repaint();
-    }
 
-   
+        painelTarefas.revalidate(); // Revalida o painel para garantir que os componentes sejam atualizados
+        painelTarefas.repaint(); // Repinta o painel para refletir as mudanças visuais
+        painelScroll.setViewportView(painelTarefas); // Atualiza o JScrollPane com o novo painel
+        painelScroll.revalidate(); // Revalida o JScrollPane para garantir que ele atualize sua exibição
+        painelScroll.repaint(); // Repinta o JScrollPane para refletir as mudanças
+
+    }
 
     public void criarTarefa() {
         JDialog dialog = new JDialog(frame, "Criar Nova Tarefa", true);
@@ -149,6 +153,10 @@ public class TarefasView {
 
         JButton criarButton = new JButton("Criar");
         criarButton.addActionListener(e -> {
+
+            // Depuração: Verificar se o botão foi clicado
+            System.out.println("Botão Criar clicado.");
+
             String nome = nomeField.getText();
             String dataString = dataField.getText();
             int prioridade = (int) prioridadeCombo.getSelectedItem();
@@ -161,9 +169,26 @@ public class TarefasView {
                 novaTarefa.setDate(data.getTime());
                 novaTarefa.setNome(nome);
                 novaTarefa.setPrioridade(prioridade);
-                gerenciadorTarefas.usarControle("create", novaTarefa);
 
+                // Depuração: Verificar os valores da nova tarefa
+                System.out
+                        .println("Tarefa Criada: Nome = " + nome + ", Data = " + data + ", Prioridade = " + prioridade);
+
+                // Passar para o gerenciador, que executará o comando de criação
+                gerenciadorTarefas.usarControle("create", novaTarefa);
+                // gerenciadorTarefas.update();
+
+                // Depuração: Verificar se o comando foi executado
+                System.out.println("Comando de criação executado.");
+
+                // Fechar o diálogo de criação
                 dialog.dispose();
+                System.out.println("Diálogo fechado.");
+
+                // Atualizar a interface
+                // updateListaTarefas(tarefas);
+                System.out.println("Interface atualizada.");
+
             } catch (ParseException ex) {
 
             }
