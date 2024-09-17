@@ -9,10 +9,6 @@ public class AlterarEstadoTarefaCommand implements Command {
     private EstadoTarefa et;
   
 
-    public AlterarEstadoTarefaCommand(int idTarefa, EstadoTarefa et){
-        this.et = et;
-        this.idTarefa = idTarefa;
-    }
 
     public void execute(){
         tarefasRepository.alterarEstadoTarefa(this.idTarefa, this.et);

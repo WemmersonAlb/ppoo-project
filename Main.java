@@ -1,17 +1,17 @@
-import java.util.ArrayList;
 import java.util.List;
 
+import Command.ControleCommand;
 import Command.CriarTarefaCommand;
 import Command.DeletarTarefaCommand;
 import Model.EstadoTarefa;
 import Model.Tarefa;
 import Repository.TarefasRepository;
-import StrategyClass.OrdenadorPorData;
 import StrategyClass.OrdenadorPorNome;
-import StrategyClass.OrdenadorPorPrioridade;
+import View.TarefasView;
+import Controller.GerenciadorTarefas;
 
 public class Main{
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         TarefasRepository tarefaRepository = new TarefasRepository();
 
         Tarefa t = new Tarefa("Carlos", 1694347200000L, EstadoTarefa.ParaFazer, 1);
@@ -21,16 +21,16 @@ public class Main{
 
         CriarTarefaCommand ctc = new CriarTarefaCommand();
 
-        ctc.setT(t);
+        ctc.setTarefa(t);
         ctc.execute();
 
-        ctc.setT(t1);
+        ctc.setTarefa(t1);
         ctc.execute();
 
-        ctc.setT(t2);
+        ctc.setTarefa(t2);
         ctc.execute();
 
-        ctc.setT(t3);
+        ctc.setTarefa(t3);
         ctc.execute();
 
 
@@ -57,5 +57,18 @@ public class Main{
             System.out.println("\n\n"+tar.getNome()+"   id: "+tar.getIdTarefa());
         }
 
+    }
+
+    public static void main(String[] args) {
+        TarefasRepository repository = new TarefasRepository();
+        ControleCommand controleCommand = new ControleCommand();
+
+        TarefasView taskGUI = new TarefasView(null);  // Inicializa sem o gerenciador ainda
+        GerenciadorTarefas gerenciadorDeTarefas = new GerenciadorTarefas(repository, controleCommand, taskGUI);
+
+        taskGUI = new TarefasView(gerenciadorDeTarefas);
+        taskGUI.exibirInterface();
+
+        
     }
 }

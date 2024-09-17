@@ -5,21 +5,21 @@ import Repository.TarefasRepository;
 
 public class CriarTarefaCommand implements Command {
     private TarefasRepository tarefasRepository = new TarefasRepository();
-    private Tarefa t;
+    private Tarefa tarefa;
    
 
 
 
     public void execute(){
-        tarefasRepository.create(this.t);
+        tarefasRepository.create(this.tarefa);
     }
 
 
 
-    public Tarefa getT() {
-        return t;
+    public Tarefa getTarefa() {
+        return this.tarefa;
     }
-    public void setT(Tarefa t) {
-        this.t = t;
+    public void setTarefa(Tarefa t) {
+        this.tarefa = t;
     }
 }
