@@ -13,14 +13,14 @@ public class ControleCommand {
           criarTarefaCommand.execute();
      }
 
-     public void excluirTarefaCommand(int idTarefa) {
-          excluirTarefaCommand.setIdTarefa(idTarefa);
+     public void excluirTarefaCommand(Tarefa tarefa) {
+          excluirTarefaCommand.setTarefa(tarefa);
           excluirTarefaCommand.execute();
      }
 
-     public void alterarEstadoTarefa(EstadoTarefa et, int idTarefa) {
+     public void alterarEstadoTarefa(EstadoTarefa et, Tarefa tarefa) {
           alterarEstadoTarefaCommand.setEt(et);
-          alterarEstadoTarefaCommand.setIdTarefa(idTarefa);
+          alterarEstadoTarefaCommand.setTarefa(tarefa);
           alterarEstadoTarefaCommand.execute();
      }
 }

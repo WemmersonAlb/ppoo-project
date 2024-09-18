@@ -1,28 +1,29 @@
 package Command;
 
 import Model.EstadoTarefa;
+import Model.Tarefa;
 import Repository.TarefasRepository;
 
 public class AlterarEstadoTarefaCommand implements Command {
-    private TarefasRepository tarefasRepository;
-    private int idTarefa;
+    private TarefasRepository tarefasRepository = new TarefasRepository();
+    private Tarefa tarefa;
     private EstadoTarefa et;
   
 
 
     public void execute(){
-        tarefasRepository.alterarEstadoTarefa(this.idTarefa, this.et);
+        tarefasRepository.alterarEstadoTarefa(this.tarefa, this.et);
     }
 
     
 
 
-    public int getIdTarefa() {
-        return idTarefa;
+    public Tarefa getTarefa() {
+        return this.tarefa;
     }
 
-    public void setIdTarefa(int idTarefa) {
-        this.idTarefa = idTarefa;
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
     }
 
     public EstadoTarefa getEt() {

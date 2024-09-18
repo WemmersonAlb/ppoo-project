@@ -43,19 +43,17 @@ public class GerenciadorTarefas implements Observer{
     public void usarControle(String comando, Tarefa t){
         switch (comando) {
             case "delete":
-                controleCommand.excluirTarefaCommand(t.getIdTarefa());
+                controleCommand.excluirTarefaCommand(t);
                 break;
             case "updateEstado":
                 
-                if(t.getEstadoTarefa().equals(EstadoTarefa.ParaFazer))
-                    controleCommand.alterarEstadoTarefa(EstadoTarefa.Fazendo, t.getIdTarefa());
-
-                if(t.getEstadoTarefa().equals(EstadoTarefa.Fazendo))
-                    controleCommand.alterarEstadoTarefa(EstadoTarefa.Completado, t.getIdTarefa());
-
-                if(t.getEstadoTarefa().equals(EstadoTarefa.Completado))
-                    controleCommand.alterarEstadoTarefa(EstadoTarefa.ParaFazer, t.getIdTarefa());
-
+                if(t.getEstadoTarefa().equals(EstadoTarefa.ParaFazer)){
+                    controleCommand.alterarEstadoTarefa(EstadoTarefa.Fazendo, t);
+                }else if(t.getEstadoTarefa().equals(EstadoTarefa.Fazendo)){
+                    controleCommand.alterarEstadoTarefa(EstadoTarefa.Completado, t);
+                }else if(t.getEstadoTarefa().equals(EstadoTarefa.Completado)){
+                    controleCommand.alterarEstadoTarefa(EstadoTarefa.ParaFazer, t);
+                }
                 break;
             case "create":
                 controleCommand.criarTarefa(t);

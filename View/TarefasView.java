@@ -30,7 +30,7 @@ public class TarefasView {
     private JPanel painelTarefas;
     JScrollPane painelScroll;
 
-    public TarefasView(GerenciadorTarefas gerenciadorTarefas) {
+    public void prepararGUI(GerenciadorTarefas gerenciadorTarefas) {
         this.frame = new JFrame("Gerenciador de Tarefas");
         this.gerenciadorTarefas = gerenciadorTarefas;
         this.painelTarefas = new JPanel();
@@ -56,22 +56,22 @@ public class TarefasView {
         criarTarefaBtn.addActionListener(e -> criarTarefa());
         ordenacaoOpcoes.addActionListener(e -> {
             switch (ordenacaoOpcoes.getSelectedIndex()) {
-                case 1:
+                case 0:
                     gerenciadorTarefas.setOrdenadorStrategy(new OrdenadorPorNome(), 1);
                     break;
-                case 2:
+                case 1:
                     gerenciadorTarefas.setOrdenadorStrategy(new OrdenadorPorNome(), 2);
                     break;
-                case 3:
+                case 2:
                     gerenciadorTarefas.setOrdenadorStrategy(new OrdenadorPorData(), 2);
                     break;
-                case 4:
+                case 3:
                     gerenciadorTarefas.setOrdenadorStrategy(new OrdenadorPorData(), 1);
                     break;
-                case 5:
+                case 4:
                     gerenciadorTarefas.setOrdenadorStrategy(new OrdenadorPorPrioridade(), 2);
                     break;
-                case 6:
+                case 5:
                     gerenciadorTarefas.setOrdenadorStrategy(new OrdenadorPorPrioridade(), 1);
                     break;
 
@@ -99,7 +99,7 @@ public class TarefasView {
         System.out.println("Atualizando painel de tarefas. Número de tarefas: " + tarefas.size());
 
         for (Tarefa t : tarefas) {
-            System.out.println("Tarefa: " + t.getNome()); // Exibe no console o nome da tarefa
+            System.out.println(t.toString()); // Exibe no console o nome da tarefa
         }
 
         painelTarefas.removeAll(); // Limpa o painel de tarefas anterior

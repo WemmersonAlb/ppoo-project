@@ -23,6 +23,7 @@ public class TarefasRepository implements Subject{
         for(Tarefa t : tarefas){
             if(t.getIdTarefa() == tOut.getIdTarefa()){
                 t.setEstadoTarefa(tOut.getEstadoTarefa());
+                break;
             }
         }
     }
@@ -32,23 +33,29 @@ public class TarefasRepository implements Subject{
             if(t.getIdTarefa() == tOut.getIdTarefa()){
                 tarefas.remove(t);
                 notifyObservers();
+                break;
             }
         }
     }
 
     public void delete(int idTarefa){
         for(Tarefa t : tarefas){
-            if(t.getIdTarefa() == idTarefa)
+            if(t.getIdTarefa() == idTarefa){
                 tarefas.remove(t);
+                System.out.println("Removido");
                 notifyObservers();
+                break;
+            }
         }
     }
 
-    public void alterarEstadoTarefa(int idTarefa, EstadoTarefa et){
+    public void alterarEstadoTarefa(Tarefa tOut, EstadoTarefa et){
         for(Tarefa t : tarefas){
-            if(t.getIdTarefa() == idTarefa)
+            if(t.getIdTarefa() == tOut.getIdTarefa()){
                 t.setEstadoTarefa(et);
                 notifyObservers();
+                break;
+            }
         }
     }
 }

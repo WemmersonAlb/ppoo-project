@@ -1,19 +1,20 @@
 package Command;
 
+import Model.Tarefa;
 import Repository.TarefasRepository;
 
 public class DeletarTarefaCommand implements Command{
     private TarefasRepository tarefasRepository = new TarefasRepository();
-    private int idTarefa;
+    private Tarefa tarefa;
 
-    public int getIdTarefa() {
-        return idTarefa;
+    public Tarefa getTarefa() {
+        return this.tarefa;
     }
-    public void setIdTarefa(int idTarefa) {
-        this.idTarefa = idTarefa;
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
     }
 
     public void execute(){
-        tarefasRepository.delete(this.idTarefa);
+        tarefasRepository.delete(this.tarefa);
     }
 }
